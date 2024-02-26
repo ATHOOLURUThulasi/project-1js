@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Translation Example</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+  body{
+    margin:0px;
+    padding:0px
+  }
+  #a{
+    margin-top:2px;
+    margin-left:60px;
+    margin-right:10px;
+    border-radius:20px;
+    outline:none;
+    /* border-color:black;
+    border-bottom-color: black; */
+    height:25px;
+    border:none;
+  
+
+  }
+  hr{
+    margin-top:25px;
+    color:blue;
+    width:10px;
+    height:10px;
+  }
+  #p{
+    margin-left:2px;
+    margin-top:30px;
+    border-radius:5px;
+    cursor:pointer;
+    background-color:pink;
+    padding:6px;
+    border:none;
+
+
+  }
+  img{
+     mix-blend-mode:multiply;
+     margin-top:20px;
+     margin-bottom:20px;
+  }
+  #pp{
+    padding:0px;
+    margin:0px;
+    background-color: darkgrey;
+     height:150px;
+  }
+
+  textarea{
+    margin-top:-400px;
+    border:none;
+    float:right;
+    margin-right:450px;
+    margin-bottom:-1000px;
+ 
+  
+
+  }
+  textarea {
+    border: 1.6px solid blue; 
+    border-radius:20px;
+    padding:10px;
+    color:firebrick;
+  }
+
+  textarea:focus {
+    outline: none;
+
+}
+  form{
+    margin-bottom:40px;
+  }
+  body{
+    background-color:aqua }
+ 
+ul{
+
+  font-size:17px;
+  margin-left:120px;
+  margin-top:3px;
+}
+h3{
+  margin-left:10px;
+}
+</style>
+</head>
+<body> 
+  <div id="pp">
+ <ins><center><div id="i"><font size="8px" color="blue">G</font><font  size="8px" color="red">o</font><font size="8px" color="gold">o</font><font size="8px" color="blue">g</font><font size="8px" color="green">l</font><font size="8px" color="red">e</font><font size="8px" color="blue">T</font><font size="8px" color="red">r</font><font size="8px" color="green">a</font><font size="8px" color="gold">n</font><font size="8px" color="blue">s</font><font size="8px" color="red">l</font><font size="8px" color="green">a</font><font size="8px" color="blue">t</font><font size="8px" color="gold">o</font><font size="8px" color="blue">r</font>
+  </div></center></ins>
+  <form>
+  <center><input type="text" size="40px" placeholder="Enter a search word" id="a">
+<input type="submit" value="search" id="p"></center>
+
+
+
+</form>
+</div>
+<h3><ins>The languages are available here for searching are:</ins></h3>
+  <ul >
+    <li>English</li>
+    <li>Spanish</li>
+    <li>French</li>
+    <li>German</li>
+    <li>Chinese</li>
+    <li>Arabic</li>
+    <li>Russian</li>
+    <li>Portuguese</li>
+    <li>Japanese</li>
+    <li>Hindi</li>
+    <li>Bengali</li>
+    <li>Urdu</li>
+    <li>Korean</li>
+    <li>Italian</li>
+    <li>Turkish</li>
+    <li>Dutch</li>
+    <li>Polish</li>
+    <li>Vietnamese</li>
+    <li>Thai</li>
+    <li>Telugu</li>
+</ul>
+<textarea id="resultText" rows="12" cols="40"></textarea>
+<script>
+var form = document.forms[0];
+  $(document).ready(()=>{
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+     p=a.value
+    u=p.lastIndexOf(" ")
+    console.log(u)
+    console.log(u)
+    q=p.slice(0,u-3)
+    console.log(u-3)
+    w=p.slice(u+1,)
+    var d= [
+    {"name": "English", "code": "en"},
+    {"name": "Spanish", "code": "es"},
+    {"name": "French", "code": "fr"},
+    {"name": "German", "code": "de"},
+    {"name": "Chinese", "code": "zh"},
+    {"name": "Arabic", "code": "ar"},
+    {"name": "Russian", "code": "ru"},
+    {"name": "Portuguese", "code": "pt"},
+    {"name": "Japanese", "code": "ja"},
+    {"name": "Hindi", "code": "hi"},
+    {"name": "Bengali", "code": "bn"},
+    {"name": "Urdu", "code": "ur"},
+    {"name": "Korean", "code": "ko"},
+    {"name": "Italian", "code": "it"},
+    {"name": "Turkish", "code": "tr"},
+    {"name": "Dutch", "code": "nl"},
+    {"name": "Polish", "code": "pl"},
+    {"name": "Vietnamese", "code": "vi"},
+    {"name": "Thai", "code": "th"},
+    {"name":"Telugu","code":"te"}
+]
+    for(i of d){
+    
+      if(i.name.toLowerCase()==w.toLowerCase()){
+        translate(i.code)
+      }
+    }
+    
+  function translate(y) {
+  var sourceText = q;
+  var sourceLang ='en';
+  var targetLang = y; 
+$.ajax({
+    url: "https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + sourceLang + "&tl=" + targetLang + "&dt=t&q=" + encodeURI(sourceText),
+    method: 'GET', 
+})
+.then(function(response) {
+    console.log(response);
+    $('#resultText').val(response[0][0][0]); 
+})
+.fail(function(xhr, status, error) {
+    console.error(xhr.responseText);
+});
+
+}
+event.target[0].value=" "
+  })
+  })
+</script>
+</body>
+</html>
+
